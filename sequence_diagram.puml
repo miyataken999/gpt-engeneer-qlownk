@@ -1,0 +1,16 @@
+@startuml
+participant "User" as user
+participant "Main" as main
+participant "YouTube API" as youtube_api
+participant "Transcript Processor" as transcript_processor
+participant "Corrector" as corrector
+
+user -> main: video_id
+main -> youtube_api: get_video_transcript(video_id)
+youtube_api -> main: transcript
+main -> transcript_processor: process_transcript(transcript)
+transcript_processor -> main: processed_transcript
+main -> corrector: correct_transcript(processed_transcript)
+corrector -> main: corrected_transcript
+main -> user: corrected_transcript
+@enduml
